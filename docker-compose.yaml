@@ -13,6 +13,5 @@ services:
       - /usr/src/app/node_modules
     networks:
       - mifos_network
-
 networks:
   mifos_network:

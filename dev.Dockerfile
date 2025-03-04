@@ -4,7 +4,7 @@ RUN apk update && apk add git && apk add ruby-full
 
 WORKDIR /usr/src/app
 
-COPY package.json ./
+COPY package*.json ./
 
 RUN npm install
 RUN npm install -g gulp-cli bower
