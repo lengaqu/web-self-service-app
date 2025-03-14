@@ -1,13 +1,13 @@
-(function(){
-  'use strict';
+(function () {
+    'use strict';
 
     angular.module('selfService')
         .service('AuthService', ['$q', '$http', '$rootScope', '$state', '$resource', 'storageService', 'BASE_URL', 'USER_ROLES', AuthService]);
 
     function AuthService($q, $http, $rootScope, $state, $resource, storageService, BASE_URL, USER_ROLES) {
 
-        var role            = '',
-            userData        = '',       
+        var role = '',
+            userData = '',
             isAuthenticated = false;
 
         storageService.getObject("user_profile").then(function (data) {
@@ -20,12 +20,18 @@
 
         this.setUser = function (res) {
             storageService.setObject('user_profile', res);
+
+            if (res && res.base64EncodedAuthenticationKey) {
+                storageService.setItem('token', res.base64EncodedAuthenticationKey);
+            }
+            $http.defaults.headers.common.Authorization = 'Basic ' + res.base64EncodedAuthenticationKey;
+
             isAuthenticated = true;
             userData = res;
             role = USER_ROLES.user;
         }
 
-        this.getUser = function() {
+        this.getUser = function () {
             return userData;
         }
 
@@ -45,11 +51,11 @@
         }
 
         //Resource for REST APIs
-        this.doLogin = function() {
-            return $resource(BASE_URL +'/self/authentication');
+        this.doLogin = function () {
+            return $resource(BASE_URL + '/self/authentication');
         }
 
-        this.logout = function() {
+        this.logout = function () {
             role = '';
             userData = '';
             isAuthenticated = false;
@@ -57,12 +63,12 @@
             $state.go('login');
         }
 
-        this.register = function(data) {
-            return $http.post(BASE_URL + '/self/registration',data);
+        this.register = function (data) {
+            return $http.post(BASE_URL + '/self/registration', data);
         }
 
-        this.verifyUser = function(data){
-            return $http.post(BASE_URL + '/self/registration/user',data);
+        this.verifyUser = function (data) {
+            return $http.post(BASE_URL + '/self/registration/user', data);
         }
 
     }
