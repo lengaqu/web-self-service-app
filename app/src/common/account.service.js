@@ -20,9 +20,11 @@
          */
         this.getClients = function () {
             return getAuthHeaders().then(function (headers) {
-                return $resource(BASE_URL + '/self/clients/', {}, {
+                var response = $resource(BASE_URL + '/self/clients/', {}, {
                     query: { method: 'GET', headers: headers, isArray: true }
                 }).query().$promise;
+                console.log('RESPONSE: ', response);
+                return response;
             });
         };
 
