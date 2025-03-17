@@ -21,7 +21,7 @@ var chalk = require('chalk');
 /*
  * Location of your backend server
  */
-var proxyTarget = 'https://dev.gcipay.us';
+var proxyTarget = 'https://dev.gcipay.us/fineract-provider/';
 
 var proxy = httpProxy.createProxyServer({
   target: proxyTarget

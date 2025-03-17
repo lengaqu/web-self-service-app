@@ -19,22 +19,23 @@
          *
          */
         this.getClients = function () {
-            return getAuthHeaders().then(function (headers) {
-                var response = $resource(BASE_URL + '/self/clients/', {}, {
-                    query: { method: 'GET', headers: headers, isArray: true }
-                }).query().$promise;
-                console.log('RESPONSE: ', response);
-                return response;
-            });
+                var authHeader = $http.defaults.headers.common.Authorization;
+                console.log("Auth header", authHeader)
+                return $resource(BASE_URL + '/self/clients/', {}, {
+                    get: {
+                        method: 'GET',
+                        headers: {
+                            Authorization: authHeader
+                        }
+                    }
+                }).get().$promise;
         };
-
-        this.getAllAccounts = function (clientId) {
-            console.log('Fetching all accounts');
-            return getAuthHeaders().then(function (headers) {
-                return $resource(BASE_URL + '/self/clients/' + clientId + '/accounts', {}, {
-                    query: { method: 'GET', headers: headers, isArray: true }
-                }).query().$promise;
-            });
+        
+        
+        
+        this.getAllAccounts = function (clientId) {//@todo rename this getClientAccounts
+            //@todo update this to return $resource(BASE_URL+'/self/clients/'+id+'/accounts'); and test
+            return $resource(BASE_URL + '/self/clients/' + clientId + '/accounts');
         };
 
         this.getClient = function (id) {

@@ -20,12 +20,7 @@
 
         this.setUser = function (res) {
             storageService.setObject('user_profile', res);
-
-            if (res && res.base64EncodedAuthenticationKey) {
-                storageService.setItem('token', res.base64EncodedAuthenticationKey);
-            }
             $http.defaults.headers.common.Authorization = 'Basic ' + res.base64EncodedAuthenticationKey;
-
             isAuthenticated = true;
             userData = res;
             role = USER_ROLES.user;
