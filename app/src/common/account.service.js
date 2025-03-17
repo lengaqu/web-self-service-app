@@ -20,7 +20,6 @@
          */
         this.getClients = function () {
                 var authHeader = $http.defaults.headers.common.Authorization;
-                console.log("Auth header", authHeader)
                 return $resource(BASE_URL + '/self/clients/', {}, {
                     get: {
                         method: 'GET',

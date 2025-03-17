@@ -20,11 +20,9 @@
                     AuthService.setUser(result);
                     AccountService.getClients()
                         .then(function (res) {
-                            console.log('Client data:', res);
                             vm.authenticating = false;
                             $state.go("app.dashboard");
                             if (res.pageItems.length !== 0) {
-                                console.log('Selected client ID:', res.pageItems[0].id);
                                 AccountService.setClientId(res.pageItems[0].id);
                                 $mdToast.show(
                                     $mdToast.simple()
