@@ -6,6 +6,14 @@
 
     function AccountService($http, $resource, BASE_URL, storageService) {
 
+        function getAuthHeaders() {
+            return storageService.getItem('token').then(function (token) {
+                return { 'Authorization': 'Basic ' + token };
+            }).catch(function () {
+                return {};
+            });
+        }
+
         /**
          * Get the clients associated with the current user's account.
          *
@@ -31,7 +39,11 @@
         };
 
         this.getClient = function (id) {
-            return $resource(BASE_URL + '/self/clients/' + id);
+            return getAuthHeaders().then(function (headers) {
+                return $resource(BASE_URL + '/self/clients/' + id, {}, {
+                    get: { method: 'GET', headers: headers }
+                }).query().$promise;
+            });
         }
 
         this.getClientImage = function (id) {
@@ -46,11 +58,19 @@
         }
 
         this.getClientAccounts = function (id) {
-            return $resource(BASE_URL + '/self/clients/' + id + '/accounts');
+            return getAuthHeaders().then(function (headers) {
+                return $resource(BASE_URL + '/self/clients/' + id, {}, {
+                    get: { method: 'GET', headers: headers }
+                }).query().$promise;
+            });
         }
 
         this.getLoanAccount = function (id) {
-            return $resource(BASE_URL + '/self/loans/' + id);
+            return getAuthHeaders().then(function (headers) {
+                return $resource(BASE_URL + '/self/loans/' + id, {}, {
+                    get: { method: 'GET', headers: headers }
+                }).query().$promise;
+            });
         }
 
         this.setClientId = function (id) {

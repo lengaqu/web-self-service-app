@@ -20,9 +20,11 @@
                     AuthService.setUser(result);
                     AccountService.getClients()
                         .then(function (res) {
+                            console.log('Client data:', res);
                             vm.authenticating = false;
                             $state.go("app.dashboard");
                             if (res.pageItems.length !== 0) {
+                                console.log('Selected client ID:', res.pageItems[0].id);
                                 AccountService.setClientId(res.pageItems[0].id);
                                 $mdToast.show(
                                     $mdToast.simple()
@@ -30,8 +32,9 @@
                                         .hideDelay(2000)
                                         .position('top right')
                                 );
-                
+
                             } else {
+                                console.log('No clients found for user');
                                 $mdToast.show(
                                     $mdToast.simple()
                                         .content("No Clients Found")
@@ -41,7 +44,8 @@
                                 AuthService.logout();
                             }
                         })
-                        .catch(function () {
+                        .catch(function (error) {
+                            console.error('Client fetch error:', error);
                             vm.authenticating = false;
                             $mdToast.show(
                                 $mdToast.simple()
@@ -51,7 +55,8 @@
                             );
                             AuthService.logout();
                         })
-                }).catch(function () {
+                }).catch(function (error) {
+                    console.error('Login error:', error);
                     vm.authenticating = false;
                     $mdToast.show(
                         $mdToast.simple()
