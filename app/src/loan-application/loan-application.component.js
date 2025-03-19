@@ -71,7 +71,13 @@
                 amortizationType: vm.template.amortizationType.id,
                 interestType: vm.template.interestType.id,
                 interestCalculationPeriodType: vm.template.interestCalculationPeriodType.id,
-                transactionProcessingStrategyId: vm.template.transactionProcessingStrategyId
+                transactionProcessingStrategyCode: vm.template.transactionProcessingStrategyCode,
+                disbursementData: [
+                    {
+                        expectedDisbursementDate: $filter('date')(new Date(), 'dd MMMM yyyy'),
+                        principal: vm.template.principal,
+                        approvedPrincipal: vm.template.approvedPrincipal
+                    }]
             };
             var data = Object.assign({}, loanTemp, vm.form);
             LoanApplicationService.loan().save(data).$promise.then(function() {
