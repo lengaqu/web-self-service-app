@@ -18,39 +18,39 @@
                 <br />
                 <md-input-container class="md-block" ng-if="vm.form.productId">
                     <label>{{ 'label.input.nominalAnnualInterest' | translate }}</label>
-                    <input name="nominalAnnualInterest" ng-model="vm.form.nominalAnnualInterest" required>
+                    <input name="nominalAnnualInterest" ng-model="vm.form.nominalAnnualInterestRate" required>
                 </md-input-container>
                 <md-input-container class="md-block" ng-if="vm.form.productId">
                     <label>{{ 'label.input.interestCompoundingPeriod' | translate }}</label>
-                    <md-select ng-model="vm.form.interestCompoundingPeriod" ng-change="" required>
-                        <md-option ng-repeat="" ng-value="">{{  }}</md-option>
+                    <md-select ng-model="vm.form.interestCompoundingPeriodType" ng-change="" required>
+                        <md-option ng-repeat="compoundingPeriodOption in vm.template.interestCompoundingPeriodTypeOptions" ng-value="compoundingPeriodOption.id">{{ compoundingPeriodOption.value }}</md-option>
                     </md-select>
                 </md-input-container>
                 </br>
                 <md-input-container class="md-block" ng-if="vm.form.productId">
                     <label>{{ 'label.input.interestPostingPeriod' | translate }}</label>
-                    <md-select ng-model="vm.form.interestPostingPeriod" ng-change="" required>
-                        <md-option ng-repeat="" ng-value="">{{  }}</md-option>
+                    <md-select ng-model="vm.form.interestPostingPeriodType" ng-change="" required>
+                        <md-option ng-repeat="postingPeriodOption in vm.template.interestPostingPeriodTypeOptions" ng-value="postingPeriodOption.id">{{ postingPeriodOption.value }}</md-option>
                     </md-select>
                 </md-input-container>
                 </br>
                 <md-input-container class="md-block" ng-if="vm.form.productId">
                     <label>{{ 'label.input.interestCalculatedUsing' | translate }}</label>
-                    <md-select ng-model="vm.form.interestCalculatedUsing" ng-change="" required>
-                        <md-option ng-repeat="" ng-value="">{{  }}</md-option>
+                    <md-select ng-model="vm.form.interestCalculationType" ng-change="" required>
+                        <md-option ng-repeat="calculationTypeOption in vm.template.interestCalculationTypeOptions" ng-value="calculationTypeOption.id">{{ calculationTypeOption.value }}</md-option>
                     </md-select>
                 </md-input-container>
                 </br>
                 <md-input-container class="md-block" ng-if="vm.form.productId">
                     <label>{{ 'label.input.daysInYear' | translate }}</label>
-                    <md-select ng-model="vm.form.daysInYear" ng-change="" required>
-                        <md-option ng-repeat="" ng-value="">{{  }}</md-option>
+                    <md-select ng-model="vm.form.interestCalculationDaysInYearType" ng-change="" required>
+                        <md-option ng-repeat="calculationDaysInYearOption in vm.template.interestCalculationDaysInYearTypeOptions" ng-value="calculationDaysInYearOption.id">{{ calculationDaysInYearOption.value }}</md-option>
                     </md-select>
                 </md-input-container>
                 </br>
                 <md-input-container class="md-block" ng-if="vm.form.productId">
                     <label>{{ 'label.input.currency' | translate }}</label>
-                    <input name="currency" value=" " ng-disabled="true" required>
+                    <input name="currency" value="{{ vm.currency }}" ng-disabled="true" required>
                 </md-input-container>
                 <md-input-container layout="row" ng-if="vm.form.productId">
                     <label>{{ 'label.input.submittedOn' | translate }}</label>
