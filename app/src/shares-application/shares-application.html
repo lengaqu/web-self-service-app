@@ -18,22 +18,22 @@
                 <br />
                 <md-input-container class="md-block" ng-if="vm.form.productId">
                     <label>{{ 'label.input.numberOfShares' | translate }}</label>
-                    <input name="numberOfShares" ng-model="vm.form.numberOfShares" required>
+                    <input name="numberOfShares" value="{{ vm.form.requestedShares }}" ng-disabled="true" required>
                 </md-input-container>
-                <md-input-container class="md-block" ng-if="vm.form.productId">
+                <!-- <md-input-container class="md-block" ng-if="vm.form.productId">
                     <label>{{ 'label.input.todaysPrice' | translate }}</label>
                     <input name="todaysPrice" ng-model="vm.form.todaysPrice" required>
-                </md-input-container>
+                </md-input-container> -->
                 <md-input-container class="md-block" ng-if="vm.form.productId">
                     <label>{{ 'label.input.defaultSavingsAccount' | translate }}</label>
-                    <md-select ng-model="" ng-change="" required>
-                        <md-option ng-repeat="" ng-value="">{{ }}</md-option>
+                    <md-select ng-model="vm.form.savingsAccountId" ng-change="" required>
+                        <md-option ng-repeat="savingsAccount in vm.savingsAccounts" ng-value="savingsAccount.id">{{ savingsAccount.accountNo }}</md-option>
                     </md-select>
                 </md-input-container>
                 </br>
                 <md-input-container class="md-block" ng-if="vm.form.productId">
                     <label>{{ 'label.input.currency' | translate }}</label>
-                    <input name="currency" value="{{ }}" ng-disabled="true" required>
+                    <input name="currency" value="{{ vm.currency }}" ng-disabled="true" required>
                 </md-input-container>
                 </br>
                 <md-input-container class="md-block" ng-if="vm.form.productId">
@@ -44,7 +44,7 @@
                 <md-input-container layout="row" ng-if="vm.form.productId">
                     <label>{{ 'label.input.submittedOn' | translate }}</label>
                     <span flex></span>
-                    <input value="{{ vm.form.submittedOnDate }}" disabled />
+                    <input value="{{ vm.form.submittedDate }}" disabled />
                 </md-input-container>
                 <br />
                 <div layout="row" flex>
