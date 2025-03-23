@@ -37,7 +37,7 @@
         }
         function getAccounts(accountNo) {
             AccountService.getAllAccounts(accountNo).get().$promise.then(function (res) {
-                vm.savingsAccounts = res.savingsAccounts.filter(account => account.status.value === "Active");
+                vm.savingsAccounts = res.savingsAccounts.filter(function (account) {account.status.value === "Active"});
             });            
         }
 
@@ -47,8 +47,8 @@
                 productId: productId
             }).$promise.then(function(template) {
                 vm.template = template;
-                vm.form.requestedShares = vm.template.productOptions.map(product => product.totalShares)[0];
-                vm.currency = vm.template.productOptions.map(product => product.currency.name)[0];
+                vm.form.requestedShares = vm.template.productOptions.map(function (product) {product.totalShares})[0];
+                vm.currency = vm.template.productOptions.map(function (product) {product.currency.name})[0];
                 vm.form.submittedDate = $filter('date','dd MMMM yyyy')(new Date(), 'dd MMMM yyyy');
             })
         }
