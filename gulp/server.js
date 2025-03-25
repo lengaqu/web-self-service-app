@@ -42,7 +42,7 @@ gulp.task('serve', ['watch'], function () {
     paths.src + '/assets/images/**/*', 
     paths.tmp + '/serve/*.html',
     paths.tmp + '/serve/**/*.html',
-    paths.tmp + '/serve/**/*.css'
+    paths.tmp + '/serve/**/*.css',
   ]);
 });
 

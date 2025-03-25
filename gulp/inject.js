@@ -10,7 +10,7 @@ var wiredep = require('wiredep').stream;
 
 gulp.task('inject:build', ['styles'], function () {
     var injectStyles = gulp.src(
-        paths.dist + '/styles/*.css',
+        paths.dist + '/styles/**/*.css',
         {read: false}
     );
 
