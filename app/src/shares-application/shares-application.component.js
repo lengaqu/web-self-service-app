@@ -47,7 +47,7 @@
                 productId: productId
             }).$promise.then(function(template) {
                 vm.template = template;
-                vm.form.requestedShares = vm.template.productOptions.map(function (product) {console.log("ts", product.totalShares); return product.totalShares})[0];
+                vm.form.requestedShares = vm.template.productOptions.map(function (product) {return product.totalShares})[0];
                 vm.currency = vm.template.productOptions.map(function (product) {return product.currency.name})[0];
                 vm.form.submittedDate = $filter('date','dd MMMM yyyy')(new Date(), 'dd MMMM yyyy');
             })
