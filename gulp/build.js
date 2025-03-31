@@ -104,6 +104,7 @@ gulp.task('clean', function (done) {
 
 gulp.task('build', function (callback) {
     runSequence('clean',
+        'styles',
         'js', 'inject:build',
         'images', 'fonts', 'misc',
         callback);

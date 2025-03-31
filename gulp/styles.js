@@ -15,8 +15,8 @@ gulp.task('styles', function () {
 
     var injectFiles = gulp.src([
         paths.src + '/assets/stylesheets/**/*.scss',
-        '!' + paths.src + '/index.scss'
-    ], {read: false});
+        paths.src + '/src/**/*.scss', // Include index.scss and any others
+    ], { read: false });
 
     var injectOptions = {
         transform: function (filePath) {

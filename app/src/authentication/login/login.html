@@ -1,37 +1,51 @@
 <div flex layout="row">
-    <div layout="col" layout-align="start center" class="cover" flex-gt-md="70" hide-xs hide-sm>
-        <div flex="60" class="cover-content">
-            <h1 class="md-display-2 cover-title">Self Service</h1>
-            <p class="md-headline">Self Service is designed by the Mifos Initiative - a global community that aims to
-                speed-up the elimination of poverty by enabling organizations to more effectively and efficiently
-                deliver responsible financial services to the world’s poor and unbanked.</p>
+    <!-- Left Section -->
+    <div layout="column" layout-align="center center" class="cover" flex-gt-md="70" hide-xs hide-sm>
+        <div class="cover-content">
+            <h1 class="md-display-1 cover-title">Self Service</h1>
+            <p class="md-headline">A Banking and Financial Platform powered by Green Capital IPay.</p>
         </div>
     </div>
-    <div class="login-container" flex flex-gt-md="30">
+    
+    <!-- Right Section -->
+    <div layout="column" layout-align="center center" flex-gt-md="30">
         <div class="md-padding translate-container" layout="row" layout-align="end">
             <translate-helper></translate-helper>
         </div>
-        <div flex class="logo" layout-margin>
-            <img width="200px" src="assets/images/MifosX_logo.png">
-            <h1 class="md-title">{{ 'login.heading.logintoyouraccount' | translate }}</h1>
+        <!-- Logo Section -->
+        <div flex layout="row" layout-align="center center" class="flex-grow">
+            <img width="200px" src="assets/images/green_capital_ipay.jpeg" class="img-container">
         </div>
+        <!-- Login Form -->
         <div flex="80" class="login-form" layout-padding>
-            <form name="loginForm" ng-submit="doLogin()">
+            <!-- Tenant Dropdown -->
+            <md-input-container class="md-block">
+                <md-icon>domain</md-icon>
+                <label>Tenant</label>
+                <md-select ng-model="loginData.tenant" ng-disabled="true">
+                    <md-option value="default" selected>default</md-option>
+                </md-select>
+            </md-input-container>
+            <form name="loginForm" ng-submit="doLogin()" style="align-items: center;">
                 <md-input-container class="md-block md-icon-float">
+                    <md-icon>account_circle</md-icon>
                     <label>Username</label>
-                    <input ng-model="loginData.username">
+                    <input ng-model="loginData.username" required>
                 </md-input-container>
                 <md-input-container class="md-block md-icon-float">
+                    <md-icon>lock</md-icon>
                     <label>Password</label>
-                    <input type="password" ng-model="loginData.password">
+                    <input type="password" ng-model="loginData.password" required>
                 </md-input-container>
-
-                <section layout="column" layout-align="start">
-                    <md-button type="submit" class="md-primary md-raised">{{ 'login.btn.login' | translate }}
-                    </md-button>
-                    <md-button class="md-default" ui-sref="forgot">{{ 'login.btn.forgot' | translate }}</md-button>
-                    <md-button class="md-primary" ui-sref="register">{{ 'login.btn.register' | translate }}</md-button>
-
+                <section layout="column" layout-align="start" style="text-align: center;">
+                    <md-checkbox ng-model="loginData.rememberMe" style="color: black;">Remember me</md-checkbox>
+                    <md-button type="submit" class="md-primary md-raised" ng-disabled="!loginData.username || !loginData.password">Login</md-button>
+                    <a ui-sref="forgot" class="login-button" style="text-align: center; display: block;
+                    margin-top: 10px;
+                    font-size: 14px;
+                    font-weight:bold;
+                    color: black;
+                    text-decoration: none;">Forgot Password?</a>
                 </section>
             </form>
         </div>

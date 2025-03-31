@@ -1,6 +1,7 @@
 FROM node:10-alpine
 
-RUN apk update && apk add git && apk add ruby-full
+# RUN apk update && apk add git && apk add ruby-full
+RUN apk update && apk add git ruby-full ruby-dev build-base linux-headers
 
 WORKDIR /usr/src/app
 
@@ -15,7 +16,7 @@ RUN bower install
 
 RUN npm install --save-dev gulp gulp-inject gulp-ruby-sass
 
-# RUN gem install sass
+RUN gem install sass
 
 EXPOSE 3000
 
